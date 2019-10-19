@@ -41,3 +41,85 @@ Add the following keys and values in the setup registry editor window:
 - Right click on "command" → New → String Value 
   - Delete the name and press Enter
   -	Set the value to “[TARGETDIR]windows-unc-path.exe” “%V"
+  
+  [![](images/installer.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/registry_1.png)
+  
+    [![](images/installer.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/registry_2.png)
+
+##### 2. Add C# Code
+
+Get path from selected directory:
+```csharp
+static void Main()
+{
+    string directoryName = null;
+
+    //Get path from directory
+    if (Environment.GetCommandLineArgs().Length > 1)
+
+        for (int i = 1; i < Environment.GetCommandLineArgs().Length; i++)
+        {
+            if (i == 1)
+            {
+                directoryName = Environment.GetCommandLineArgs()[i];
+            }
+            else
+            {
+                directoryName = directoryName + " " + Environment.GetCommandLineArgs()[i];
+            }
+        }
+
+    if (string.IsNullOrEmpty(directoryName))
+        MessageBox.Show("After installing the application, " +
+            "Right click on a folder an select 'Get UNC Path'");
+    else
+
+        Clipboard.SetText(GetUNCPath(@directoryName));
+}
+```
+
+Get UNC-path from directory path:
+
+```csharp
+//Get UNC path from directory path
+public static string GetUNCPath(string originalPath)
+{
+    StringBuilder sb = new StringBuilder(512);
+    int size = sb.Capacity;
+
+
+    char b = originalPath[1];
+    if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
+    {
+        originalPath = originalPath.Substring(1, originalPath.Length - 1);
+    }
+
+    // look for the {LETTER}: combination ...
+    if (originalPath.Length > 2 && originalPath[1] == ':')
+    {
+        // the only valid drive letters are a-z && A-Z.
+        char c = originalPath[0];
+
+
+        if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+        {
+            int error = WNetGetConnection(originalPath.Substring(0, 2),
+                sb, ref size);
+
+            if (error == 0)
+            {
+                string path = Path.GetFullPath(originalPath)
+                    .Substring(Path.GetPathRoot(originalPath).Length);
+                return Path.Combine(sb.ToString().TrimEnd(), path);
+            }
+        }
+    }
+
+    return originalPath;
+}
+```
+##### 2. Build and install
+
+- Right click on the "Setup Project" in the solution explorer and Build
+- Right click on the "Setup Project" in the solution explorer and Install
+[![](images/installer.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/install.png)
