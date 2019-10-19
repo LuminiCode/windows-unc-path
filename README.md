@@ -1,5 +1,6 @@
 # Get the UNC path from a network drive via application which is in the Windows shell context menu and put it to the Clipboard
 Get and copy UNC path to clipboard:
+
 [![](images/get_path.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/get_path.png)
 
 ## Basic informations
