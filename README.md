@@ -1,4 +1,4 @@
-# Get the UNC path from a network drive via application which is in the Windows shell context menu
+# Get the UNC path from a network drive via application which is in the Windows shell context menu and put it to the Clipboard
 
 ## Basic informations
 - Windows Forms App (.NET Framework)
