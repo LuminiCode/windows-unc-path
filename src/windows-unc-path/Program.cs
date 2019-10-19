@@ -26,11 +26,10 @@ namespace windows_unc_path
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new Form1());
-            
+
             string directoryName = null;
 
             //Get path from directory
-
             if (Environment.GetCommandLineArgs().Length > 1)
 
                 for (int i = 1; i < Environment.GetCommandLineArgs().Length; i++)
@@ -49,8 +48,8 @@ namespace windows_unc_path
                 MessageBox.Show("After installing the application, " +
                     "Right click on a folder an select 'Get UNC Path'");
             else
-                MessageBox.Show(directoryName);
-            //    Clipboard.SetText(GetUNCPath(folderName));
+             
+                Clipboard.SetText(GetUNCPath(@directoryName));
         }
 
 
@@ -60,21 +59,27 @@ namespace windows_unc_path
             StringBuilder sb = new StringBuilder(512);
             int size = sb.Capacity;
 
+
+            char b = originalPath[1];
+            if ((b >= 'a' && b <= 'z') || (b >= 'A' && b <= 'Z'))
+            {
+                originalPath = originalPath.Substring(1, originalPath.Length-1);
+            }         
+          
             // look for the {LETTER}: combination ...
             if (originalPath.Length > 2 && originalPath[1] == ':')
-            {
-                // don't use char.IsLetter here - as that can be misleading
+            {  
                 // the only valid drive letters are a-z && A-Z.
                 char c = originalPath[0];
 
+
                 if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
                 {
-
                     int error = WNetGetConnection(originalPath.Substring(0, 2),
                         sb, ref size);
+
                     if (error == 0)
                     {
-                        DirectoryInfo dir = new DirectoryInfo(originalPath);
                         string path = Path.GetFullPath(originalPath)
                             .Substring(Path.GetPathRoot(originalPath).Length);
                         return Path.Combine(sb.ToString().TrimEnd(), path);

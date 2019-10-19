@@ -220,7 +220,7 @@
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:Setup"
         "ProductCode" = "8:{D96AB462-A7DC-470B-B7D1-3D19A6000779}"
-        "PackageCode" = "8:{99B923ED-B645-447E-B091-8E7B71A77BA3}"
+        "PackageCode" = "8:{85D9E399-C793-44D6-862C-8BD637364A3A}"
         "UpgradeCode" = "8:{37F4502C-20E9-4116-9ABC-B3ACE09A4195}"
         "AspNetVersion" = "8:2.0.50727.0"
         "RestartWWWService" = "11:FALSE"
@@ -365,7 +365,7 @@
                                                     "Condition" = "8:"
                                                     "Transitive" = "11:FALSE"
                                                     "ValueTypes" = "3:1"
-                                                    "Value" = "8:\"[TARGETDIR]windows-unc-path.exe\" “%V”"
+                                                    "Value" = "8:\"[TARGETDIR]windows-unc-path.exe\" �\"%V\""
                                                     }
                                                 }
                                             }
