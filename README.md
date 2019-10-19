@@ -42,9 +42,9 @@ Add the following keys and values in the setup registry editor window:
   - Delete the name and press Enter
   -	Set the value to “[TARGETDIR]windows-unc-path.exe” “%V"
   
-  [![](images/installer.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/registry_1.png)
+  [![](images/registry_1.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/registry_1.png)
   
-    [![](images/installer.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/registry_2.png)
+    [![](images/registry_2.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/registry_2.png)
 
 ##### 2. Add C# Code
 
@@ -122,4 +122,4 @@ public static string GetUNCPath(string originalPath)
 
 - Right click on the "Setup Project" in the solution explorer and Build
 - Right click on the "Setup Project" in the solution explorer and Install
-[![](images/installer.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/install.png)
+[![](images/install.png)](https://github.com/LuminiCode/windows-unc-path/blob/master/images/install.png)
